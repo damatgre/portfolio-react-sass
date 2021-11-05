@@ -1,0 +1,24 @@
+.app{
+    height: 100vh;
+}
+
+.sections{
+    width: 100%;
+    height: calc(100vh - 70px);
+    background-color:brown;
+    position: relative;
+    top: 70px;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+    &::-webkit-scrollbar{
+        display: none;
+    }//gets rid of scrollbar
+
+//applies to all sections and calculates where to start
+    > *{
+        width: 100vw;
+        height: calc(100vh - 70px);
+        scroll-snap-align: start;
+    }
+}
