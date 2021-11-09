@@ -1,3 +1,11 @@
 .intro{
-    background-color: blueviolet;
+    background-color: white;
+    .left{
+        flex: 0.5;
+        background-color: yellow;
+    }
+    .right{
+        flex: 0.5;
+        background-color: violet;
+    }
 }
