@@ -1,11 +1,18 @@
 
-import { React, useState } from 'react'
+import { React, useEffect, useState } from 'react';
 import './portfolio.scss';
 import PortfolioList from '../portfolioList/portfoliolist';
+import {
+    featuredPortfolio,
+    frontendPortfolio,
+    backendPortfolio,
+    fullstackPorfolio
+} from "../../data";
 
 export default function Portfolio() {
 
-    const [selected, setSelected] = useState('featured')
+    const [selected, setSelected] = useState("featured");
+    const [data, setData] = useState([]);
 
     const list = [
         {
@@ -13,26 +20,41 @@ export default function Portfolio() {
             title: 'Featured',
         },
         {
-            id: 'web',
-            title: 'Web App',
+            id: 'front-end',
+            title: 'Front-End',
         },
         {
-            id: 'mobile',
-            title: 'Mobile App',
+            id: 'back-end',
+            title: 'Back-End',
         },
         {
-            id: 'design',
-            title: 'Design',
+            id: 'full-stack',
+            title: 'Full-Stack',
         },
-        {
-            id: 'branding',
-            title: 'Branding',
-        },
-        {
-            id: 'content',
-            title: 'Content'
+        
+    ];
+
+    useEffect(()=>{
+
+        switch(selected){
+            case "featured":
+                setData(featuredPortfolio);
+                break;
+            case "front-end":
+                setData(frontendPortfolio);
+                break;
+            case "back-end":
+                setData(backendPortfolio);
+                break;
+            case "full-stack":
+                setData(fullstackPorfolio);
+                break;
+                default: 
+                setData(featuredPortfolio);
+
         }
-    ]
+
+    }, [selected])
 
     return (
         <div className='portfolio' id='portfolio'>
@@ -48,36 +70,14 @@ export default function Portfolio() {
                 ))}
             </ul>
             <div className='container'>
-                <div className='item'>
-                    <img src="https://images.ctfassets.net/hrltx12pl8hq/5GaLeZJlLyOiQC4gOA0qUM/a0398c237e9744ade8b072f99349e07a/shutterstock_152461202_thumb.jpg?fit=fill&w=480&h=270"
+                {data.map(d=> (
+                    <div className='item'>
+                    <img src={d.img}
                         alt='' />
-                    <h3>Application</h3>
+                    <h3>{d.title}</h3>
                 </div>
-                <div className='item'>
-                    <img src="https://images.ctfassets.net/hrltx12pl8hq/5GaLeZJlLyOiQC4gOA0qUM/a0398c237e9744ade8b072f99349e07a/shutterstock_152461202_thumb.jpg?fit=fill&w=480&h=270"
-                        alt='' />
-                    <h3>Application</h3>
-                </div>
-                <div className='item'>
-                    <img src="https://images.ctfassets.net/hrltx12pl8hq/5GaLeZJlLyOiQC4gOA0qUM/a0398c237e9744ade8b072f99349e07a/shutterstock_152461202_thumb.jpg?fit=fill&w=480&h=270"
-                        alt='' />
-                    <h3>Application</h3>
-                </div>
-                <div className='item'>
-                    <img src="https://images.ctfassets.net/hrltx12pl8hq/5GaLeZJlLyOiQC4gOA0qUM/a0398c237e9744ade8b072f99349e07a/shutterstock_152461202_thumb.jpg?fit=fill&w=480&h=270"
-                        alt='' />
-                    <h3>Application</h3>
-                </div>
-                <div className='item'>
-                    <img src="https://images.ctfassets.net/hrltx12pl8hq/5GaLeZJlLyOiQC4gOA0qUM/a0398c237e9744ade8b072f99349e07a/shutterstock_152461202_thumb.jpg?fit=fill&w=480&h=270"
-                        alt='' />
-                    <h3>Application</h3>
-                </div>
-                <div className='item'>
-                    <img src="https://images.ctfassets.net/hrltx12pl8hq/5GaLeZJlLyOiQC4gOA0qUM/a0398c237e9744ade8b072f99349e07a/shutterstock_152461202_thumb.jpg?fit=fill&w=480&h=270"
-                        alt='' />
-                    <h3>Application</h3>
-                </div>
+                ))}
+                
             </div>
         </div>
     )
