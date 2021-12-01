@@ -1,7 +1,9 @@
-import React from 'react'
+import {React, useState} from 'react'
 import './work.scss'
 
 export default function Work() {
+
+    const [ currentSlide, setCurrentSlide ] = useState(0)
 
     const data = [
         {
@@ -13,20 +15,26 @@ export default function Work() {
         {
             id: 2,
             title: "What I Had For Dinner",
-            desc: "What I Had For Dinner is a recipe blog that engages the user to find new and exciting recipes. Users can check out posts from the community, and create their own posts to store recipes they want to use again! Think of it as your own personalized recipe book that helps make sure you don't lose any amazing recipes you've found online.",
+            desc: "A recipe blog that engages the user to find new and exciting recipes. Users can check out posts from the community, and create their own posts to store recipes they want to use again!",
             img: "https://media.istockphoto.com/photos/taking-a-photo-of-food-picture-id815617372?k=20&m=815617372&s=612x612&w=0&h=x7kqqTz0aKYSVulHEN-4LkBqUtjWKrl3PKGv0B1m46s="
         },
         {
             id: 3,
             title: "Be Our Guest",
-            desc: "Be Our Guest is a full stack web application that allows users to write reviews about local restaurants. Users are able to post their reviews, post reactions to reviews made by other users, and to add friends to their profiles.",
+            desc: "A full stack web application that allows users to write reviews about local restaurants. Users are able to post their reviews, post reactions to reviews made by other users, and to add friends to their profiles.",
             img: "https://st2.depositphotos.com/2672741/8676/i/600/depositphotos_86765614-stock-photo-gallant-chandelier-with-light-candles.jpg"
         }
     ]
 
+    const handleClick = (way)=>{
+        way === "left" 
+        ? setCurrentSlide(currentSlide > 0 ? currentSlide - 1: 2)
+        : setCurrentSlide(currentSlide < data.length - 1 ? currentSlide + 1 : 0)
+    }
+
     return (
         <div className='work' id='work'>
-            <div className="slider">
+            <div className="slider" style={{transform: `translateX(-${currentSlide * 100}vw)` }}>
                 {data.map(d => (
                 
                 <div className="container">
@@ -52,8 +60,8 @@ export default function Work() {
                     </div>
                 </div>))}
             </div>
-            <img src="assets/white-arrow-removebg-preview.png" className="arrow left" alt="" />
-            <img src="assets/white-arrow-removebg-preview.png" className="arrow right" alt="" />
+            <img src="assets/white-arrow-removebg-preview.png" className="arrow left" alt="" onClick={() => handleClick("left")} />
+            <img src="assets/white-arrow-removebg-preview.png" className="arrow right" alt="" onClick={() => handleClick()}/>
 
         </div>
     )
