@@ -54,7 +54,7 @@ export default function Work() {
                         </div>
                         <div className="right">
                             <img 
-                            src="https://www.secondnature.com.au/wp-content/uploads/2019/02/igor-miske-174209-unsplash-min-1024x618.jpg" 
+                            src={d.img} 
                             alt="" />
                         </div>
                     </div>
